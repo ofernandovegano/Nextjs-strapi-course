@@ -1,6 +1,8 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Header from "./Header";
 import Footer from "~components/Footer";
+import Showcase from "~components/Showcase";
 import styles from "~styles/Layout.module.css";
 
 export default function Layout({
@@ -9,6 +11,8 @@ export default function Layout({
   keywords = "music, dj, events",
   children = <></>,
 }) {
+  const router = useRouter();
+
   return (
     <div>
       <Head>
@@ -18,8 +22,8 @@ export default function Layout({
       </Head>
 
       <Header />
-      <div className={styles.container}></div>
-      {children}
+      {router.pathname === "/" && <Showcase />}
+      <div className={styles.container}>{children}</div>
       <Footer />
     </div>
   );
